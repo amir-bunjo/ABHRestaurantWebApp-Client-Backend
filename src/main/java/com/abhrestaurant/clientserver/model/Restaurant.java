@@ -3,7 +3,7 @@ package com.abhrestaurant.clientserver.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="restaurant")
+@Table(name="restaurants")
 public class Restaurant {
 
 
@@ -23,14 +23,30 @@ public class Restaurant {
     @Column(name="description")
     private String description;
 
+    @Column(name="photos")
+    private String photos;
+
+    @Column(name="promo_photo")
+    private String promophoto;
+
+    @Column(name="latitude")
+    private String latitude;
+
+    @Column(name="longitude")
+    private String longitude;
+
     public Restaurant() {}
 
-    public Restaurant(Long id, Long cityId, String name, String street, String description) {
+    public Restaurant(Long id, Long cityId, String name, String street, String description, String photos, String promophoto, String latitude, String longitude) {
         this.id = id;
         this.cityId = cityId;
         this.name = name;
         this.street = street;
         this.description = description;
+        this.photos = photos;
+        this.promophoto = promophoto;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public Long getId() {
@@ -71,5 +87,37 @@ public class Restaurant {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(String photos) {
+        this.photos = photos;
+    }
+
+    public String getPromophoto() {
+        return promophoto;
+    }
+
+    public void setPromopic(String promophoto) {
+        this.promophoto = promophoto;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 }
