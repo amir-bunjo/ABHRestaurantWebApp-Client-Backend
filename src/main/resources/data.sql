@@ -38,3 +38,44 @@ INSERT INTO restaurants (city_id,name,street,promo_photo) VALUES (3,'Konyali Ahm
 INSERT INTO restaurants (city_id,name,street,promo_photo) VALUES (3,'Ćevabdžinica Mrkva','Bravadžiluk 13','/assets/img/restaurant-promo/mrkva.jpg' );
 INSERT INTO restaurants (city_id,name,street,promo_photo) VALUES (3,'Fabrika dobre hrane','Milana Preloga','/assets/img/restaurant-promo/fabrika.jpeg' );
 
+
+
+
+INSERT INTO tables (restaurant_id,seats,available) VALUES (1,2,TRUE);
+INSERT INTO tables (restaurant_id,seats,available) VALUES (1,2,TRUE);
+INSERT INTO tables (restaurant_id,seats,available) VALUES (1,3,TRUE);
+INSERT INTO tables (restaurant_id,seats,available) VALUES (1,3,TRUE);
+INSERT INTO tables (restaurant_id,seats,available) VALUES (1,4,TRUE);
+INSERT INTO tables (restaurant_id,seats,available) VALUES (1,4,TRUE);
+INSERT INTO tables (restaurant_id,seats,available) VALUES (1,4,TRUE);
+INSERT INTO tables (restaurant_id,seats,available) VALUES (1,4,TRUE);
+
+INSERT INTO tables (restaurant_id,seats,available) VALUES (2,4,TRUE);
+INSERT INTO tables (restaurant_id,seats,available) VALUES (2,4,TRUE);
+INSERT INTO tables (restaurant_id,seats,available) VALUES (2,4,FALSE);
+INSERT INTO tables (restaurant_id,seats,available) VALUES (3,4,FALSE);
+
+
+INSERT INTO reservation (restaurant_id,table_id,time,date,guest_number) VALUES (1,3,'13:30',TO_DATE('22/06/2019', 'DD/MM/YYYY'),3);
+
+INSERT INTO reservation (restaurant_id,table_id,time,date,guest_number) VALUES (1,2,'15:30',TO_DATE('22/06/2019', 'DD/MM/YYYY'),2);
+
+INSERT INTO reservation (restaurant_id,table_id,time,date,guest_number) VALUES (1,4,'12:30',TO_DATE('22/06/2019', 'DD/MM/YYYY'),3);
+
+INSERT INTO reservation (restaurant_id,table_id,time,date,guest_number) VALUES (1,4,'16:00',TO_DATE('21/06/2019', 'DD/MM/YYYY'),4);
+
+INSERT INTO reservation (restaurant_id,table_id,time,date,guest_number) VALUES (1,4,'15:00',TO_DATE('22/06/2019', 'DD/MM/YYYY'),4);
+
+
+INSERT INTO reservation (restaurant_id,table_id,time,date,guest_number) VALUES (1,2,'13:15',TO_DATE('22/06/2019', 'DD/MM/YYYY'),2);
+
+INSERT INTO reservation (restaurant_id,table_id,time,date,guest_number) VALUES (1,3,'15:30',TO_DATE('22/06/2019', 'DD/MM/YYYY'),3);
+
+INSERT INTO reservation (restaurant_id,table_id,time,date,guest_number) VALUES (1,1,'13:30',TO_DATE('22/06/2019', 'DD/MM/YYYY'),2);
+
+INSERT INTO reservation (restaurant_id,table_id,time,date,guest_number) VALUES (1,4,'14:30',TO_DATE('21/06/2019', 'DD/MM/YYYY'),2);
+
+INSERT INTO reservation (restaurant_id,table_id,time,date,guest_number) VALUES (1,4,'17:30',TO_DATE('21/06/2019', 'DD/MM/YYYY'),4);
+
+INSERT INTO reservation (restaurant_id,table_id,time,date,guest_number) VALUES (1,5,'14:30',TO_DATE('22/06/2019', 'DD/MM/YYYY'),4);
+

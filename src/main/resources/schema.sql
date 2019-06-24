@@ -1,7 +1,10 @@
 
 DROP TABLE IF EXISTS country;
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS restaurants;
+DROP TABLE IF EXISTS restaurants CASCADE;
+DROP TABLE IF EXISTS reservation;
+DROP TABLE IF EXISTS tables;
+
 
 
 
@@ -33,5 +36,27 @@ CREATE TABLE IF NOT EXISTS restaurants (
    promo_photo VARCHAR NOT NULL,
    latitude FLOAT ,
    longitude FLOAT
+);
+
+
+
+CREATE TABLE IF NOT EXISTS tables (
+ id SERIAL PRIMARY KEY,
+ restaurant_id integer not null references restaurants(id),
+ seats INT NOT NULL,
+ available BOOLEAN NOT NULL,
+ start_at TIME,
+ reservation_date DATE
+
+
+);
+
+CREATE TABLE IF NOT EXISTS reservation (
+ id SERIAL PRIMARY KEY,
+ restaurant_id integer not null references restaurants(id),
+ table_id integer not null references tables(id),
+ time TIME NOT NULL,
+ date DATE NOT NULL,
+ guest_number INT NOT NULL
 );
 

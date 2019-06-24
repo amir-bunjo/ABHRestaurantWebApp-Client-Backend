@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -16,12 +17,14 @@ public class RestaurantController {
     @Autowired
     RestaurantRepository restaurantRepository;
 
-    @GetMapping("/restaurant")
+    @GetMapping("/allrestaurant")
     public List<Restaurant> getAllRestaurant(){
 
         System.out.println("Should be getted all restaurant");
         return restaurantRepository.findAll();
     }
+
+
 
     @GetMapping("/restaurant/matchpatern/{patern}")
     public List<Restaurant> getMatchedRestaurants(@PathVariable String patern){
@@ -45,12 +48,11 @@ public class RestaurantController {
     }
 
 
-    @GetMapping("/restaurant/{restaurantId}")
+    @GetMapping("/restaurant/{id}")
     public Restaurant getRestaurantById(@PathVariable Long id){
 
-        Restaurant restaurant = restaurantRepository.getOne(id);
         System.out.println("Should be getted restaurant " + id);
-        return restaurantRepository.getOne(id);
+        return restaurantRepository.findRestaurantById(id);
     }
 
     @PostMapping("/restaurant")

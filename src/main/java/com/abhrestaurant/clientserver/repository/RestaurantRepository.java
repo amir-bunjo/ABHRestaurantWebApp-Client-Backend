@@ -11,6 +11,8 @@ public interface RestaurantRepository extends JpaRepository<Restaurant,Long> {
 
     List<Restaurant> findFirst2ByName(String name);
 
+    Restaurant findRestaurantById(Long id);
+
     @Query(value = "SELECT * FROM restaurants ORDER BY id LIMIT 9 OFFSET ?1 ", nativeQuery = true)
     List<Restaurant> findRestaurantsWithStartIndex( Long numberofvalues );
 

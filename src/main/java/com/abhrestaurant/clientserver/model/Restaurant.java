@@ -1,6 +1,10 @@
 package com.abhrestaurant.clientserver.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name="restaurants")
@@ -34,6 +38,11 @@ public class Restaurant {
 
     @Column(name="longitude")
     private String longitude;
+
+    @OneToMany
+    @JoinColumn(name = "restaurant_id" , referencedColumnName = "id")
+    @JsonIgnoreProperties(value = { "restaurant" })
+    private List<com.abhrestaurant.clientserver.model.Table> tables;
 
     public Restaurant() {}
 
@@ -101,10 +110,9 @@ public class Restaurant {
         return promophoto;
     }
 
-    public void setPromopic(String promophoto) {
+    public void setPromophoto(String promophoto) {
         this.promophoto = promophoto;
     }
-
     public String getLatitude() {
         return latitude;
     }
@@ -120,4 +128,14 @@ public class Restaurant {
     public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
+
+    public List<com.abhrestaurant.clientserver.model.Table> getTables() {
+        return tables;
+    }
+
+    public void setTables(List<com.abhrestaurant.clientserver.model.Table> tables) {
+        this.tables = tables;
+    }
+
+
 }

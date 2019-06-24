@@ -2,6 +2,7 @@ package com.abhrestaurant.clientserver.model;
 
 
 import javax.persistence.*;
+import javax.persistence.Table;
 
 @Entity
 @Table(name="users")
