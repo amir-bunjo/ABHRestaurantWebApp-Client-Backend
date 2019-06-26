@@ -39,8 +39,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-       web.ignoring().antMatchers("/api/create/user");
-    }
+        web.ignoring().antMatchers("/api/create/user").antMatchers();
+        web.ignoring().antMatchers("/api/restaurants/{startindex}");
+        web.ignoring().antMatchers("/api/restaurant/{id}");
+        web.ignoring().antMatchers("/api/restaurant/matchpatern/{patern}");
+        web.ignoring().antMatchers("/api/reservations/bydate/{dateString}/byguest/{guestNumber}/bytime/{timeString}/{restaurantId}");
+        web.ignoring().antMatchers("/api/reservation/available/count/{restaurantId}/{dateString}");
+        web.ignoring().antMatchers("/api//table/restaurant/seats/{restaurantId}/{seats}/{dateString}/{timeString}");    }
 
     /*
             @Autowired

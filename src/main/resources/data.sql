@@ -10,8 +10,8 @@ INSERT INTO users (first_name,last_name,email,country,city,account_role,password
  VALUES ('Amir','Bunjo','bunjo16@gmail.com','BiH','Sarajevo','USER','YnVuam8xMjM=','38762360120');
 
 
-INSERT INTO restaurants (city_id,name,street,promo_photo) VALUES (1,'Vatra','Ferhadija','/assets/img/restaurant-promo/vatra.jpg' );
-INSERT INTO restaurants (city_id,name,street,promo_photo) VALUES (1,'Chipas','Strosmajerova','/assets/img/restaurant-promo/chipas.jpg' );
+INSERT INTO restaurants (city_id,name,street,promo_photo,description,latitude,longitude) VALUES (1,'Vatra','Ferhadija','/assets/img/restaurant-promo/vatra.jpg','Vatra serve hot and cold drinks, whole-bean coffee, microground instant coffee known as VIA, espresso, caffe latte...',43.8616156,18.417399 );
+INSERT INTO restaurants (city_id,name,street,promo_photo,description,latitude,longitude) VALUES (1,'Chipas','Strosmajerova','/assets/img/restaurant-promo/chipas.jpg','Chipas locations serve hot and cold drinks, whole-bean coffee, microground instant coffee known as VIA, espresso, caffe latte, full- and ',45.8616156,17.417399 );
 INSERT INTO restaurants (city_id,name,street,promo_photo) VALUES (1,'Four Seasons','Marijin Dvor 1','/assets/img/restaurant-promo/four-seasons.jpg' );
 INSERT INTO restaurants (city_id,name,street,promo_photo) VALUES (1,'Vapiano','Marijin Dvor 2','/assets/img/restaurant-promo/vapiano.jpeg' );
 INSERT INTO restaurants (city_id,name,street,promo_photo) VALUES (1,'Zmaj','Autobuska','/assets/img/restaurant-promo/zmaj.jpg' );
