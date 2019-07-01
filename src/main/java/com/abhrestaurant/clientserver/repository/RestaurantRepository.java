@@ -19,6 +19,6 @@ public interface RestaurantRepository extends JpaRepository<Restaurant,Long> {
     @Query(value= "SELECT count(*) FROM restaurants", nativeQuery = true)
     Long getTableLength();
 
-    @Query(value= " SELECT * FROM restaurants WHERE name ILIKE %?1% ", nativeQuery = true)
-    List<Restaurant> getMatchedRestaurants(String matchpatern);
+    @Query(value= " SELECT * FROM restaurants WHERE name ILIKE %?1% AND mark <= ?2 ", nativeQuery = true)
+    List<Restaurant> getMatchedRestaurants(String matchpatern,Float mark);
 }

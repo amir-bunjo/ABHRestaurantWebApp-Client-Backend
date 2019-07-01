@@ -40,10 +40,10 @@ public class Restaurant {
     private String promophoto;
 
     @Column(name="latitude")
-    private String latitude;
+    private Float latitude;
 
     @Column(name="longitude")
-    private String longitude;
+    private Float longitude;
 
     @OneToMany
     @JoinColumn(name = "restaurant_id" , referencedColumnName = "id")
@@ -52,7 +52,7 @@ public class Restaurant {
 
     public Restaurant() {}
 
-    public Restaurant(Long id, Long cityId, String name, String street, String description, String photos, String promophoto, String latitude, String longitude) {
+    public Restaurant(Long id, Long cityId, String name, String street, String description, String photos, String promophoto, Float latitude, Float longitude) {
         this.id = id;
         this.cityId = cityId;
         this.name = name;
@@ -135,19 +135,20 @@ public class Restaurant {
     public void setPromophoto(String promophoto) {
         this.promophoto = promophoto;
     }
-    public String getLatitude() {
+
+    public Float getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(Float latitude) {
         this.latitude = latitude;
     }
 
-    public String getLongitude() {
+    public Float getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(Float longitude) {
         this.longitude = longitude;
     }
 

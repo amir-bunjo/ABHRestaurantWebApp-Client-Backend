@@ -1,8 +1,12 @@
 package com.abhrestaurant.clientserver.controller;
 
 
+import com.abhrestaurant.clientserver.exception.ResourceNotFoundException;
 import com.abhrestaurant.clientserver.model.Restaurant;
+import com.abhrestaurant.clientserver.model.Reviews;
 import com.abhrestaurant.clientserver.repository.RestaurantRepository;
+import com.abhrestaurant.clientserver.repository.ReviewsRepository;
+import com.abhrestaurant.clientserver.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +21,12 @@ public class RestaurantController {
     @Autowired
     RestaurantRepository restaurantRepository;
 
+    @Autowired
+    ReviewsRepository reviewsRepository;
+
+    @Autowired
+    UserRepository userRepository;
+
     @GetMapping("/allrestaurant")
     public List<Restaurant> getAllRestaurant(){
 
@@ -26,11 +36,11 @@ public class RestaurantController {
 
 
 
-    @GetMapping("/restaurant/matchpatern/{patern}")
-    public List<Restaurant> getMatchedRestaurants(@PathVariable String patern){
+    @GetMapping("/restaurant/matchpatern/{patern}/{mark}")
+    public List<Restaurant> getMatchedRestaurants(@PathVariable String patern, @PathVariable Float mark){
 
         System.out.println("Should be getted all restaurant");
-        return restaurantRepository.getMatchedRestaurants(patern);
+        return restaurantRepository.getMatchedRestaurants(patern,mark);
     }
 
     @GetMapping("/restaurant/length")
@@ -55,19 +65,21 @@ public class RestaurantController {
         return restaurantRepository.findRestaurantById(id);
     }
 
-    @PostMapping("/restaurant")
-    public void saveRestaurant(@RequestBody Restaurant restaurant){
+    @PostMapping("/save/restaurant")
+    public String saveRestaurant(@RequestBody Restaurant restaurant){
 
         restaurantRepository.save(restaurant);
         System.out.println("Should be saved restaurant");
+        return ("Restaurant " + restaurant.getName() + "succesfully saved");
     }
 
-    @PutMapping("/restaurant")
-    public void updateRestaurant(@RequestBody Restaurant restaurant){
+    @PutMapping("/update/restaurant")
+    public boolean updateRestaurant(@RequestBody Restaurant restaurant){
 
 
         restaurantRepository.save(restaurant);
         System.out.println("Should be saved restaurant");
+        return true;
     }
 
     @DeleteMapping("/restaurant/{restaurantId}")
@@ -75,4 +87,20 @@ public class RestaurantController {
 
         System.out.println("Should be deleted restaurant");
     }
+/*
+    @PostMapping("/save/review/{email}")
+    public String saveReview(@RequestBody Reviews reviews,@PathVariable String email){
+
+        System.out.println("Should be saved review" + reviews.getComment() );
+        return userRepository.findUserByEmail(email).map(user -> {
+                    reviews.setUser(user);
+                    reviewsRepository.save(reviews);
+                    return "s";
+                }).orElseThrow(() -> new ResourceNotFoundException("User " + email + " not found"));
+
+
+       // return ("Review from user " + reviews.getUser().getId() + "succesfully saved");
+    }
+
+*/
 }

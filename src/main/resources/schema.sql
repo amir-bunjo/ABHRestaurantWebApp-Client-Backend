@@ -1,9 +1,12 @@
 
 DROP TABLE IF EXISTS country;
+DROP TABLE IF EXISTS reviews;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS restaurants CASCADE;
 DROP TABLE IF EXISTS reservation;
 DROP TABLE IF EXISTS tables;
+
+
 
 
 
@@ -61,4 +64,15 @@ CREATE TABLE IF NOT EXISTS reservation (
  date DATE NOT NULL,
  guest_number INT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS reviews (
+ id SERIAL PRIMARY KEY,
+ restaurant_id integer not null references restaurants(id),
+ user_id integer  not null references users(id),
+ mark FLOAT,
+ comment VARCHAR
+
+);
+
+
 

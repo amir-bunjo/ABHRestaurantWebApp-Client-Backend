@@ -1,5 +1,6 @@
 package com.abhrestaurant.clientserver.configuration;
 
+import com.abhrestaurant.clientserver.exception.ResourceNotFoundException;
 import com.abhrestaurant.clientserver.model.User;
 import com.abhrestaurant.clientserver.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +17,14 @@ public class AppUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findUserByEmail(email);
-        if(user==null)
-            throw new UsernameNotFoundException("User 404");
-        else
-            return new UserPrincipal(user);
+        return userRepository.findUserByEmail(email).map(user ->{
+            if(user==null)
+                throw new UsernameNotFoundException("User 404");
+            else
+                return new UserPrincipal(user);
+
+        }).orElseThrow(() -> new ResourceNotFoundException("User " + email + " not found"));
+
 
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -66,6 +67,18 @@ public class AccountController {
         System.out.println("Succesfully deleted user " + id);
 
         return ("Succesfully  deleted user " + id);
+    }
+
+    @GetMapping("/user/byemail/{username}")
+    public Optional<User> getUserByUsername(@PathVariable String username) {
+        return userRepository.findUserByEmail("bunjo16@gmail.com");
+    }
+
+    @GetMapping("/user_id/byemail/{username}")
+    public Long getIdByUsername(@PathVariable String username) {
+
+
+        return userRepository.getIdByEmail(username);
     }
 
 }
