@@ -33,6 +33,8 @@ CREATE TABLE IF NOT EXISTS restaurants (
    street VARCHAR NOT NULL,
    description VARCHAR ,
    photos VARCHAR ,
+   mark FLOAT,
+   votes FLOAT,
    promo_photo VARCHAR NOT NULL,
    latitude FLOAT ,
    longitude FLOAT

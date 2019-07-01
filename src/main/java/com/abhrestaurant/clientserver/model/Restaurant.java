@@ -30,6 +30,12 @@ public class Restaurant {
     @Column(name="photos")
     private String photos;
 
+    @Column(name="mark")
+    private Float mark;
+
+    @Column(name="votes")
+    private Float votes;
+
     @Column(name="promo_photo")
     private String promophoto;
 
@@ -104,6 +110,22 @@ public class Restaurant {
 
     public void setPhotos(String photos) {
         this.photos = photos;
+    }
+
+    public Float getMark() {
+        return mark;
+    }
+
+    public void setMark(Float mark) {
+        this.mark = mark;
+    }
+
+    public Float getVotes() {
+        return votes;
+    }
+
+    public void setVotes(Float votes) {
+        this.votes = votes;
     }
 
     public String getPromophoto() {

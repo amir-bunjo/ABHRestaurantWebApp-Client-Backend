@@ -45,32 +45,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/api/restaurant/matchpatern/{patern}");
         web.ignoring().antMatchers("/api/reservations/bydate/{dateString}/byguest/{guestNumber}/bytime/{timeString}/{restaurantId}");
         web.ignoring().antMatchers("/api/reservation/available/count/{restaurantId}/{dateString}");
-        web.ignoring().antMatchers("/api//table/restaurant/seats/{restaurantId}/{seats}/{dateString}/{timeString}");    }
+        web.ignoring().antMatchers("/api//table/restaurant/seats/{restaurantId}/{seats}/{dateString}/{timeString}");
+    }
 
-    /*
-            @Autowired
-            public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-
-                List<User> listOfUser = userRepository.findAll();
-                for(User user: listOfUser) {
-                    System.out.println(user.getEmail());
-                    auth.inMemoryAuthentication().withUser(user.getEmail()).password("{noop}"+user.getPassword()).roles("USER");
-                }
-            }
-
-
-            @Bean
-            @Override
-            protected UserDetailsService userDetailsService() {
-               // return super.userDetailsService();
-                List<UserDetails> users = new ArrayList<>();
-                users.add(User.withDefaultPasswordEncoder().username("amir").password("1234").roles("USER").build());
-                users.add(User.withDefaultPasswordEncoder().username("ar").password("saas").roles("USER").build());
-
-
-                return new InMemoryUserDetailsManager(users);
-            }
-         */
     @Autowired
     private  UserDetailsService userDetailsService;
 
@@ -82,6 +59,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
         return provider;
     }
-
 
 }
