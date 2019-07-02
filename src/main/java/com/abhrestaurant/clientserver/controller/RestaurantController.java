@@ -2,6 +2,7 @@ package com.abhrestaurant.clientserver.controller;
 
 
 import com.abhrestaurant.clientserver.exception.ResourceNotFoundException;
+import com.abhrestaurant.clientserver.model.Reservation;
 import com.abhrestaurant.clientserver.model.Restaurant;
 import com.abhrestaurant.clientserver.model.Reviews;
 import com.abhrestaurant.clientserver.repository.RestaurantRepository;
@@ -10,6 +11,7 @@ import com.abhrestaurant.clientserver.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,11 +38,38 @@ public class RestaurantController {
 
 
 
-    @GetMapping("/restaurant/matchpatern/{patern}/{mark}")
-    public List<Restaurant> getMatchedRestaurants(@PathVariable String patern, @PathVariable Float mark){
+    @PostMapping("/restaurant/matchpatern/{patern}/{mark}/{price}")
+    public List<Restaurant> getMatchedRestaurants(@PathVariable String patern, @PathVariable Float mark, @PathVariable Float price, @RequestBody List<String> cousines) {
 
-        System.out.println("Should be getted all restaurant");
-        return restaurantRepository.getMatchedRestaurants(patern,mark);
+        List<Restaurant> matchedRestaurants = null;
+        List<Restaurant> found = new ArrayList<Restaurant>();
+
+        if (patern.equals("-"))
+            matchedRestaurants = restaurantRepository.getMatchedRestaurantsByMarkAndPrice(mark, price);
+        else
+            matchedRestaurants = restaurantRepository.getMatchedRestaurants(patern, mark, price);
+
+        System.out.println("Should be getted all restaurant" + patern);
+
+        if (cousines.size() == 0)
+            System.out.println("empty cousines");
+
+        for (Restaurant matchedRestaurant : matchedRestaurants) {
+            for (String cousine : cousines) {
+                if (matchedRestaurant.getFoodTypes().contains(cousine))
+                    found.add(matchedRestaurant);
+            }
+        }
+
+        for (String cousine : cousines)
+            System.out.println(cousine);
+
+        matchedRestaurants.removeAll(found);
+
+        if (cousines.size() == 0)
+            return matchedRestaurants;
+        else
+            return found;
     }
 
     @GetMapping("/restaurant/length")

@@ -36,6 +36,12 @@ public class Restaurant {
     @Column(name="votes")
     private Float votes;
 
+    @Column(name="food_types")
+    private String foodTypes;
+
+    @Column(name="price_range")
+    private Float priceRange;
+
     @Column(name="promo_photo")
     private String promophoto;
 
@@ -52,16 +58,21 @@ public class Restaurant {
 
     public Restaurant() {}
 
-    public Restaurant(Long id, Long cityId, String name, String street, String description, String photos, String promophoto, Float latitude, Float longitude) {
+    public Restaurant(Long id, Long cityId, String name, String street, String description, String photos, Float mark, Float votes, Float priceRange, String foodTypes, String promophoto, Float latitude, Float longitude, List<com.abhrestaurant.clientserver.model.Table> tables) {
         this.id = id;
         this.cityId = cityId;
         this.name = name;
         this.street = street;
         this.description = description;
         this.photos = photos;
+        this.mark = mark;
+        this.votes = votes;
+        this.priceRange = priceRange;
+        this.foodTypes = foodTypes;
         this.promophoto = promophoto;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.tables = tables;
     }
 
     public Long getId() {
@@ -126,6 +137,22 @@ public class Restaurant {
 
     public void setVotes(Float votes) {
         this.votes = votes;
+    }
+
+    public Float getPriceRange() {
+        return priceRange;
+    }
+
+    public String getFoodTypes() {
+        return foodTypes;
+    }
+
+    public void setFoodTypes(String foodTypes) {
+        this.foodTypes = foodTypes;
+    }
+
+    public void setPriceRange(Float priceRange) {
+        this.priceRange = priceRange;
     }
 
     public String getPromophoto() {
