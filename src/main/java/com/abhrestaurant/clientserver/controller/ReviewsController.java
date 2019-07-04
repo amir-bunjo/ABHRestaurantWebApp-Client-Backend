@@ -37,11 +37,17 @@ public class ReviewsController {
     }
 
     @GetMapping("/reviews/{restaurantId}/{username}")
-    public Float getRestaurantById(@PathVariable Long restaurantId, @PathVariable String username){
+    public Reviews getRestaurantById(@PathVariable Long restaurantId, @PathVariable String username){
 
         Long userId = userRepository.getIdByEmail(username);
         System.out.println("Should be getted review with restaurantId  " + restaurantId);
         return reviewsRepository.findReview(restaurantId,userId);
+    }
+
+    @GetMapping("reviews/{restaurantId}")
+    public Reviews getByRestaurantId(@PathVariable Long restaurantId){
+
+        return reviewsRepository.findByRestaurantId(restaurantId);
     }
 
 }
