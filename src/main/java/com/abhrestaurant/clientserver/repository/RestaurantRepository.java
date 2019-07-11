@@ -27,4 +27,9 @@ public interface RestaurantRepository extends JpaRepository<Restaurant,Long> {
 
     @Query(value= " SELECT * FROM restaurants WHERE name ILIKE %?1%  ", nativeQuery = true)
     List<Restaurant> getAllRestaurantsWithMatchedName(String matchpatern);
+
+    @Query(value= " SELECT id, name FROM restaurants ORDER BY id LIMIT 9 OFFSET ?1 ", nativeQuery = true)
+    List<Object> getAllRestaurantsNameAndId( Long startindex);
+
+
 }

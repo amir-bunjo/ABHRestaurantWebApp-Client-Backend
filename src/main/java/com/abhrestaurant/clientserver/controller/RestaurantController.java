@@ -102,6 +102,13 @@ public class RestaurantController {
         System.out.println("Should be getted restaurant " + id);
         return restaurantRepository.findRestaurantById(id);
     }
+    //ADMIN
+    @GetMapping("/restaurant/name/id/{startIndex}")
+    public List<Object> getAllRestaurantsNameAndId(@PathVariable Long startIndex){
+
+        System.out.println("Should be getted restaurant's id and name " );
+        return restaurantRepository.getAllRestaurantsNameAndId(startIndex);
+    }
 
     @PostMapping("/save/restaurant")
     public String saveRestaurant(@RequestBody Restaurant restaurant){
@@ -249,5 +256,7 @@ public class RestaurantController {
 
         return found;
     }
+
+
 
 }

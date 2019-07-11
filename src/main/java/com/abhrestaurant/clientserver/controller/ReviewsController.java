@@ -50,4 +50,10 @@ public class ReviewsController {
         return reviewsRepository.findByRestaurantId(restaurantId);
     }
 
+    @GetMapping("reviews/average/{restaurantId}")
+    public Float getRestaurantRating(@PathVariable Long restaurantId){
+
+        return reviewsRepository.getAverageOfRevievByRestaurantId(restaurantId);
+    }
+
 }

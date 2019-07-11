@@ -39,7 +39,7 @@ public class ReservationController {
     }
 
     @PostMapping("/reservation/{restaurantId}/{tableId}")
-    public  Reservation saveReservation(@PathVariable Long restaurantId,@PathVariable Long tableId,@RequestBody Reservation reservation){
+    public  Boolean saveReservation(@PathVariable Long restaurantId,@PathVariable Long tableId,@RequestBody Reservation reservation){
 
         //reservationRepository.save(reservation);
         //restaurantRepository.findById(restaurantId).map(restaurant -> reservation.setRestaurant(restaurant) );
@@ -51,7 +51,7 @@ public class ReservationController {
 
             reservation.setTable(tableRepository.findById(tableId).get());
 
-            return reservationRepository.save(reservation);
+            return true;
 
 
         }).orElseThrow(() -> new ResourceNotFoundException("Restaurant " + restaurantId + " not found"));
@@ -124,6 +124,8 @@ public class ReservationController {
 
 
     }
+
+
 
 
 
