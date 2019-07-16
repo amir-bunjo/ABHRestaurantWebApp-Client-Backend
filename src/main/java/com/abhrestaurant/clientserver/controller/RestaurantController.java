@@ -6,17 +6,24 @@ import com.abhrestaurant.clientserver.model.Reservation;
 import com.abhrestaurant.clientserver.model.Restaurant;
 import com.abhrestaurant.clientserver.model.Reviews;
 import com.abhrestaurant.clientserver.model.Table;
-import com.abhrestaurant.clientserver.repository.RestaurantRepository;
-import com.abhrestaurant.clientserver.repository.ReviewsRepository;
-import com.abhrestaurant.clientserver.repository.UserRepository;
+import com.abhrestaurant.clientserver.repository.*;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.transaction.Transactional;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import com.cloudinary.Cloudinary;
+
+
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -31,6 +38,16 @@ public class RestaurantController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    ReservationRepository reservationRepository;
+
+    @Autowired
+    TableRepository tableRepository;
+
+    @PersistenceContext
+    private EntityManager em;
+
 
     @GetMapping("/allrestaurant")
     public List<Restaurant> getAllRestaurant(){
@@ -110,8 +127,11 @@ public class RestaurantController {
         return restaurantRepository.getAllRestaurantsNameAndId(startIndex);
     }
 
-    @PostMapping("/save/restaurant")
-    public String saveRestaurant(@RequestBody Restaurant restaurant){
+    @PostMapping("/save/restaurant/{coverName}/{logoName}")
+    public String saveRestaurant(@RequestBody Restaurant restaurant, @PathVariable String coverName, @PathVariable String logoName) throws Exception{
+
+        restaurant.setCoverphoto(this.uploadRestaurantImageToCloudinary(coverName,restaurant.getCoverphoto()));
+        restaurant.setPromophoto(this.uploadRestaurantImageToCloudinary(logoName,restaurant.getPromophoto()));
 
         restaurantRepository.save(restaurant);
         System.out.println("Should be saved restaurant");
@@ -121,16 +141,41 @@ public class RestaurantController {
     @PutMapping("/update/restaurant")
     public boolean updateRestaurant(@RequestBody Restaurant restaurant){
 
-
         restaurantRepository.save(restaurant);
         System.out.println("Should be saved restaurant");
         return true;
     }
 
+    @Transactional
     @DeleteMapping("/restaurant/{restaurantId}")
-    public void deleteRestaurantById(@PathVariable Long id){
+    public int deleteRestaurantById(@PathVariable Long restaurantId){
 
         System.out.println("Should be deleted restaurant");
+
+
+       // restaurantRepository.deleteById(restaurantId);
+        //return true;
+       // reservationRepository.deleteByRestaurantId(restaurantId);
+
+        restaurantRepository.findById(restaurantId).map(restaurant -> {
+
+          //  Query query = em.createNativeQuery(
+          //          "DELETE FROM reservation  WHERE restaurant_id = :p");
+         //   int deletedCount = query.setParameter("p", restaurantId).executeUpdate();
+            int countReviewas = reviewsRepository.deleteReviewsByRestaurant(restaurantId);
+             int count = reservationRepository.deleteByRestaurant(restaurantId);
+
+            System.out.println("count of delted reservations is: " + count);
+
+          int countOftab = tableRepository.deleteTableByRestaurant(restaurantId);
+
+            System.out.println("count of delted tables is: " + countOftab);
+
+
+           restaurantRepository.deleteById(restaurant.getId());
+            return count;
+        });
+        return 0;
     }
 /*
     @PostMapping("/save/review/{email}")
@@ -256,6 +301,64 @@ public class RestaurantController {
 
         return found;
     }
+
+    @PostMapping("/restaurant/image/upload/{imgName}")
+    public String uploadRestaurantImageToCloudinary(@PathVariable String imgName, @RequestBody() String imgUrl) throws Exception{
+        //obrisat sve ako treba jer bugaStrign
+        String cloudName = "dacid3ish";
+        String apiKey = "395382115388869";
+        String apiSecret = "kEPDIlIhu1_sPsS2mzjfwce-7ZY";
+
+        //String[] imgArray = imageModel.getUrlsInDatabase();
+        //  String newImage = imageModel.getImgUrl();
+        // Integer imgToEdit = imageModel.getImageToEdit();  // old way
+
+        String arrayToUpload = "";
+
+
+        Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+                "cloud_name", "dacid3ish",
+                "api_key", "395382115388869",
+                "api_secret", "kEPDIlIhu1_sPsS2mzjfwce-7ZY"));
+
+        Map response = cloudinary.uploader().upload(imgUrl,
+                ObjectUtils.asMap("public_id", "abh/restaurants/" + imgName));
+
+
+        String url = (String) response.get("secure_url");
+
+        System.out.println("secure url: " + response.get("secure_url"));
+
+        // System.out.println("ispod ispis  "+ imgToEdit + "  imgarraylength  " + imgArray.length);
+
+
+/*
+        for(int i=0;i<imgArray.length;i++) {
+
+            if(i!= imgToEdit && imgToEdit>=0)
+                arrayToUpload +=  i!=imgArray.length - 1 ? imgArray[i] + "," : imgArray[i];
+            else if(i== imgToEdit && imgToEdit>=0 )
+                arrayToUpload +=  i!=imgArray.length - 1 ? url +  "," : url ;
+            else
+                arrayToUpload +=  i!=imgArray.length - 1 ? imgArray[i] + "," : imgArray[i];
+            System.out.println(arrayToUpload);
+            System.out.println();
+        }
+
+        if(imgToEdit==-1)
+            arrayToUpload += ',' + url;  // for adding new
+
+
+
+        System.out.println("string for upload:  " + arrayToUpload);
+*/
+
+        return url;
+
+    }
+
+
+
 
 
 

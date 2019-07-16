@@ -2,6 +2,8 @@ package com.abhrestaurant.clientserver.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,6 +20,7 @@ public class Table {
     @ManyToOne
     @JoinColumn (name="restaurant_id",referencedColumnName = "id")
     @JsonIgnore
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Restaurant restaurant;
 
     @Column(name="seats")
@@ -32,7 +35,7 @@ public class Table {
     @Column(name="reservation_date")
     private String reservevationDate;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
     @JoinColumn(name = "table_id" , referencedColumnName = "id")
     @JsonIgnoreProperties(value = "table")
     private List<Reservation> reservations;

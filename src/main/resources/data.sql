@@ -71,9 +71,9 @@ INSERT INTO reservation (restaurant_id,table_id,time,date,guest_number) VALUES (
 
 INSERT INTO reservation (restaurant_id,table_id,time,date,guest_number) VALUES (1,2,'13:15',TO_DATE('22/06/2019', 'DD/MM/YYYY'),2);
 
-INSERT INTO reservation (restaurant_id,table_id,time,date,guest_number) VALUES (1,3,'15:30',TO_DATE('22/06/2019', 'DD/MM/YYYY'),3);
+INSERT INTO reservation (restaurant_id,table_id,time,date,guest_number) VALUES (2,3,'15:30',TO_DATE('22/06/2019', 'DD/MM/YYYY'),3);
 
-INSERT INTO reservation (restaurant_id,table_id,time,date,guest_number) VALUES (1,1,'13:30',TO_DATE('22/06/2019', 'DD/MM/YYYY'),2);
+INSERT INTO reservation (restaurant_id,table_id,time,date,guest_number) VALUES (2,1,'13:30',TO_DATE('22/06/2019', 'DD/MM/YYYY'),2);
 
 INSERT INTO reservation (restaurant_id,table_id,time,date,guest_number) VALUES (1,4,'14:30',TO_DATE('21/06/2019', 'DD/MM/YYYY'),2);
 

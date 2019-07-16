@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS restaurants (
    price_range FLOAT,
    food_types VARCHAR,
    promo_photo VARCHAR NOT NULL,
+   cover_photo VARCHAR,
    latitude FLOAT ,
    longitude FLOAT
 );
@@ -49,7 +50,7 @@ CREATE TABLE IF NOT EXISTS restaurants (
 
 CREATE TABLE IF NOT EXISTS tables (
  id SERIAL PRIMARY KEY,
- restaurant_id integer not null references restaurants(id),
+ restaurant_id integer  references restaurants(id),
  seats INT NOT NULL,
  available BOOLEAN NOT NULL,
  start_at TIME,
@@ -60,8 +61,8 @@ CREATE TABLE IF NOT EXISTS tables (
 
 CREATE TABLE IF NOT EXISTS reservation (
  id SERIAL PRIMARY KEY,
- restaurant_id integer not null references restaurants(id),
- table_id integer not null references tables(id),
+ restaurant_id integer  references restaurants(id),
+ table_id integer ,
  time TIME NOT NULL,
  date DATE NOT NULL,
  guest_number INT NOT NULL
@@ -69,7 +70,7 @@ CREATE TABLE IF NOT EXISTS reservation (
 
 CREATE TABLE IF NOT EXISTS reviews (
  id SERIAL PRIMARY KEY,
- restaurant_id integer not null references restaurants(id),
+ restaurant_id integer  references restaurants(id),
  user_id integer  not null references users(id),
  mark FLOAT,
  comment VARCHAR

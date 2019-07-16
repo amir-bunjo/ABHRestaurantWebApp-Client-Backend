@@ -1,6 +1,8 @@
 package com.abhrestaurant.clientserver.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.persistence.Table;
@@ -45,13 +47,16 @@ public class Restaurant {
     @Column(name="promo_photo")
     private String promophoto;
 
+    @Column(name="cover_photo")
+    private String coverphoto;
+
     @Column(name="latitude")
     private Float latitude;
 
     @Column(name="longitude")
     private Float longitude;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval=true)
     @JoinColumn(name = "restaurant_id" , referencedColumnName = "id")
     @JsonIgnoreProperties(value = { "restaurant" })
     private List<com.abhrestaurant.clientserver.model.Table> tables;
@@ -117,6 +122,14 @@ public class Restaurant {
 
     public String getPhotos() {
         return photos;
+    }
+
+    public String getCoverphoto() {
+        return coverphoto;
+    }
+
+    public void setCoverphoto(String coverphoto) {
+        this.coverphoto = coverphoto;
     }
 
     public void setPhotos(String photos) {

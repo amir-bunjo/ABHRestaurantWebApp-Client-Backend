@@ -50,6 +50,7 @@ public class ReservationController {
             reservation.setRestaurant(restaurant);
 
             reservation.setTable(tableRepository.findById(tableId).get());
+            reservationRepository.save(reservation);
 
             return true;
 

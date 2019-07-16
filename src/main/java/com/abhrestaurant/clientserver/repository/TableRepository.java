@@ -4,6 +4,7 @@ import com.abhrestaurant.clientserver.model.Reservation;
 import com.abhrestaurant.clientserver.model.Restaurant;
 import com.abhrestaurant.clientserver.model.Table;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -15,4 +16,8 @@ public interface TableRepository extends JpaRepository<Table,Long> {
     Long findCountOfAvailableTables(Long restaurantId,Boolean a);
 
     List<Table> findTableBySeatsAndRestaurant(Integer seats, Restaurant restaurant);
+
+    @Modifying
+    @Query(value = "DELETE FROM tables WHERE restaurant_id = ?1 ", nativeQuery = true )
+    int deleteTableByRestaurant(Long restaurantId);
 }
