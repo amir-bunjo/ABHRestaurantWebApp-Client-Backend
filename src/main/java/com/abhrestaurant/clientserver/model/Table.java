@@ -26,14 +26,6 @@ public class Table {
     @Column(name="seats")
     private Integer seats;
 
-    @Column(name="available")
-    private Boolean available;
-
-    @Column(name="start_at")
-    private String startAt;
-
-    @Column(name="reservation_date")
-    private String reservevationDate;
 
     @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
     @JoinColumn(name = "table_id" , referencedColumnName = "id")
@@ -43,12 +35,9 @@ public class Table {
     public Table() {
     }
 
-    public Table(Long id, Integer seats, Boolean available, String startAt, String reservevationDate) {
+    public Table(Long id, Integer seats) {
         this.id = id;
         this.seats = seats;
-        this.available = available;
-        this.startAt = startAt;
-        this.reservevationDate = reservevationDate;
     }
 
     public Long getId() {
@@ -75,21 +64,7 @@ public class Table {
         this.seats = seats;
     }
 
-    public Boolean getAvailable() {
-        return available;
-    }
 
-    public void setAvailable(Boolean available) {
-        this.available = available;
-    }
-
-    public String getStartAt() {
-        return startAt;
-    }
-
-    public void setStartAt(String startAt) {
-        this.startAt = startAt;
-    }
 
     public List<Reservation> getReservations() {
         return reservations;

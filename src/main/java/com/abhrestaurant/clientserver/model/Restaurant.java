@@ -61,6 +61,10 @@ public class Restaurant {
     @JsonIgnoreProperties(value = { "restaurant" })
     private List<com.abhrestaurant.clientserver.model.Table> tables;
 
+    @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval=true)
+    @JoinColumn(name = "restaurant_id" , referencedColumnName = "id")
+    private List<Meal> meals;
+
     public Restaurant() {}
 
     public Restaurant(Long id, Long cityId, String name, String street, String description, String photos, Float mark, Float votes, Float priceRange, String foodTypes, String promophoto, Float latitude, Float longitude, List<com.abhrestaurant.clientserver.model.Table> tables) {
@@ -200,5 +204,11 @@ public class Restaurant {
         this.tables = tables;
     }
 
+    public List<Meal> getMeals() {
+        return meals;
+    }
 
+    public void setMeals(List<Meal> meals) {
+        this.meals = meals;
+    }
 }

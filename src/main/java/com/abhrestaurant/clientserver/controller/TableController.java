@@ -47,6 +47,14 @@ public class TableController {
         return tableRepository.findAll();
     }
 
+    @PostMapping("/save/tables")
+    public  List<Table> saveListOfTables(@RequestBody List<Table> listOfTables){
+        for(Table table: listOfTables)
+            tableRepository.save(table);
+        System.out.println("Should be saved listOfTables");
+        return listOfTables;
+    }
+
     @GetMapping("/table/available/count/{restaurantId}")
     public  Long getCountOfAvailable(@PathVariable Long restaurantId ){
 

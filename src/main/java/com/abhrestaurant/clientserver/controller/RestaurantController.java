@@ -45,6 +45,9 @@ public class RestaurantController {
     @Autowired
     TableRepository tableRepository;
 
+    @Autowired
+    MealsController mealsController;
+
     @PersistenceContext
     private EntityManager em;
 
@@ -128,25 +131,32 @@ public class RestaurantController {
     }
 
     @PostMapping("/save/restaurant/{coverName}/{logoName}")
-    public String saveRestaurant(@RequestBody Restaurant restaurant, @PathVariable String coverName, @PathVariable String logoName) throws Exception{
+    public Restaurant saveRestaurant(@RequestBody Restaurant restaurant, @PathVariable String coverName, @PathVariable String logoName) throws Exception{
+
+
+
         if(restaurant.getCoverphoto().startsWith("data:image"))
          restaurant.setCoverphoto(this.uploadRestaurantImageToCloudinary(coverName,restaurant.getCoverphoto()));
         if(restaurant.getPromophoto().startsWith("data:image"))
             restaurant.setPromophoto(this.uploadRestaurantImageToCloudinary(logoName,restaurant.getPromophoto()));
-        System.out.println(restaurant.getId());
+        System.out.println("restaurant id" + restaurant.getId());
         if(restaurant.getId()!=null) {
-            restaurantRepository.findById(restaurant.getId()).map(res -> {
-                restaurant.setTables(res.getTables());
-                restaurantRepository.save(restaurant);
-                System.out.println("Should be saved restaurant");
-                return ("Restaurant " + restaurant.getName() + "succesfully saved");
-            });
+            Restaurant restaurantInDB = restaurantRepository.getOne(restaurant.getId());
+            System.out.println("nije null");
+
+            System.out.println("restoran je" + restaurantInDB.getName());
+            restaurant.setTables(restaurantInDB.getTables());
+            System.out.println("Should be saved restaurant");
+            if(restaurant.getMeals().size()>0)
+             mealsController.saveMealsByRestaurantId(restaurant.getMeals(),restaurant.getId());
+            return restaurantRepository.save(restaurant);
+
         }
         else
-            restaurantRepository.save(restaurant);
+             return restaurantRepository.save(restaurant);
 
 
-        return ("Restaurant " + restaurant.getName() + "succesfully saved");
+
 
     }
 
@@ -329,9 +339,9 @@ public class RestaurantController {
 
 
         Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
-                "cloud_name", "kkraljevic",
-                "api_key", "555473889443414",
-                "api_secret", "46lG4apQ5T08ciyBTbn21a7MxBo"));
+                "cloud_name", "dacid3ish",
+                "api_key", "395382115388869",
+                "api_secret", "kEPDIlIhu1_sPsS2mzjfwce-7ZY"));
 
         Map response = cloudinary.uploader().upload(imgUrl,
                 ObjectUtils.asMap("public_id", "abh/restaurants/" + imgName));

@@ -10,7 +10,7 @@ INSERT INTO users (first_name,last_name,email,country,city,account_role,password
  VALUES ('Amir','Bunjo','bunjo16@gmail.com','BiH','Sarajevo','USER','YnVuam8xMjM=','38762360120');
 
 
-INSERT INTO restaurants (city_id,name,street,promo_photo,description,latitude,longitude,mark,votes,price_range,food_types) VALUES (1,'Vatra','Ferhadija','/assets/img/restaurant-promo/vatra.jpg','Vatra serve hot and cold drinks, whole-bean coffee, microground instant coffee known as VIA, espresso, caffe latte...',43.8616156,18.417399,5,1,3, 'Bosnian | Vegeterian | Halal');
+INSERT INTO restaurants (city_id,name,street,promo_photo,description,latitude,longitude,mark,votes,price_range,food_types) VALUES (1,'Vatra','Ferhadija','https://res.cloudinary.com/dacid3ish/image/upload/v1563350636/abh/restaurants/vatra.jpg.jpg','Vatra serve hot and cold drinks, whole-bean coffee, microground instant coffee known as VIA, espresso, caffe latte...',43.8616156,18.417399,5,1,3, 'Bosnian | Vegeterian | Halal');
 INSERT INTO restaurants (city_id,name,street,promo_photo,description,latitude,longitude,mark,votes,price_range,food_types) VALUES (1,'Chipas','Strosmajerova','/assets/img/restaurant-promo/chipas.jpg','Chipas locations serve hot and cold drinks, whole-bean coffee, microground instant coffee known as VIA, espresso, caffe latte, full- and ',45.8616156,17.417399,3,1,2 , 'Bosnian | Vegeterian | Halal' );
 INSERT INTO restaurants (city_id,name,street,promo_photo,description,latitude,longitude,mark,votes,price_range,food_types) VALUES (1,'Four Seasons','Marijin Dvor 1','/assets/img/restaurant-promo/four-seasons.jpg','Four Season locations serve hot and cold drinks, whole-bean coffee, microground instant coffee known as VIA, espresso, caffe latte, full- and ',45.8616156,17.417399 ,2,1 ,4, 'Bosnian | Turkish | Halal');
 INSERT INTO restaurants (city_id,name,street,promo_photo,description,latitude,longitude,mark,votes,price_range,food_types) VALUES (1,'Vapiano','Marijin Dvor 2','/assets/img/restaurant-promo/vapiano.jpeg','Vapiano locations serve hot and cold drinks, whole-bean coffee, microground instant coffee known as VIA, espresso, caffe latte, full- and ',45.8616156,17.417399 ,2.4,1 ,1, 'Bosnian | Vegeterian | Halal');
@@ -42,20 +42,20 @@ INSERT INTO restaurants (city_id,name,street,promo_photo,description,latitude,lo
 
 
 
-INSERT INTO tables (restaurant_id,seats,available) VALUES (1,2,TRUE);
-INSERT INTO tables (restaurant_id,seats,available) VALUES (1,2,TRUE);
-INSERT INTO tables (restaurant_id,seats,available) VALUES (1,3,TRUE);
-INSERT INTO tables (restaurant_id,seats,available) VALUES (1,3,TRUE);
-INSERT INTO tables (restaurant_id,seats,available) VALUES (1,4,TRUE);
-INSERT INTO tables (restaurant_id,seats,available) VALUES (1,4,TRUE);
-INSERT INTO tables (restaurant_id,seats,available) VALUES (1,4,TRUE);
-INSERT INTO tables (restaurant_id,seats,available) VALUES (1,4,TRUE);
+INSERT INTO tables (restaurant_id,seats) VALUES (1,2);
+INSERT INTO tables (restaurant_id,seats) VALUES (1,2);
+INSERT INTO tables (restaurant_id,seats) VALUES (1,3);
+INSERT INTO tables (restaurant_id,seats) VALUES (1,3);
+INSERT INTO tables (restaurant_id,seats) VALUES (1,4);
+INSERT INTO tables (restaurant_id,seats) VALUES (1,4);
+INSERT INTO tables (restaurant_id,seats) VALUES (1,4);
+INSERT INTO tables (restaurant_id,seats) VALUES (1,4);
 
-INSERT INTO tables (restaurant_id,seats,available) VALUES (2,4,TRUE);
-INSERT INTO tables (restaurant_id,seats,available) VALUES (2,4,TRUE);
-INSERT INTO tables (restaurant_id,seats,available) VALUES (2,4,FALSE);
+INSERT INTO tables (restaurant_id,seats) VALUES (2,4);
+INSERT INTO tables (restaurant_id,seats) VALUES (2,4);
+INSERT INTO tables (restaurant_id,seats) VALUES (2,4);
 
-INSERT INTO tables (restaurant_id,seats,available) VALUES (3,4,FALSE);
+INSERT INTO tables (restaurant_id,seats) VALUES (3,4);
 
 
 INSERT INTO reservation (restaurant_id,table_id,time,date,guest_number) VALUES (1,3,'13:30',TO_DATE('22/06/2019', 'DD/MM/YYYY'),3);
@@ -81,3 +81,6 @@ INSERT INTO reservation (restaurant_id,table_id,time,date,guest_number) VALUES (
 
 INSERT INTO reservation (restaurant_id,table_id,time,date,guest_number) VALUES (1,5,'14:30',TO_DATE('22/06/2019', 'DD/MM/YYYY'),4);
 
+
+
+INSERT INTO meals (restaurant_id,name,description,price,meal_type,meal_category) VALUES (2,'cevapi','cevapi sa kajmakom i lukom',5,'grilled','Lunch');

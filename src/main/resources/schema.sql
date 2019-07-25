@@ -5,6 +5,8 @@ DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS restaurants CASCADE;
 DROP TABLE IF EXISTS reservation;
 DROP TABLE IF EXISTS tables;
+DROP TABLE IF EXISTS meals;
+
 
 
 
@@ -51,10 +53,10 @@ CREATE TABLE IF NOT EXISTS restaurants (
 CREATE TABLE IF NOT EXISTS tables (
  id SERIAL PRIMARY KEY,
  restaurant_id integer  references restaurants(id),
- seats INT NOT NULL,
- available BOOLEAN NOT NULL,
- start_at TIME,
- reservation_date DATE
+ seats INT NOT NULL
+
+
+
 
 
 );
@@ -74,6 +76,17 @@ CREATE TABLE IF NOT EXISTS reviews (
  user_id integer  not null references users(id),
  mark FLOAT,
  comment VARCHAR
+
+);
+
+CREATE TABLE IF NOT EXISTS meals (
+ id SERIAL PRIMARY KEY,
+ restaurant_id integer  references restaurants(id),
+ name VARCHAR,
+ description VARCHAR,
+ price FLOAT,
+ meal_type VARCHAR,
+ meal_category VARCHAR
 
 );
 
