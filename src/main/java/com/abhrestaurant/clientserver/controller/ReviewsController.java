@@ -8,6 +8,7 @@ import com.abhrestaurant.clientserver.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -38,7 +39,7 @@ public class ReviewsController {
 
     @GetMapping("/reviews/{restaurantId}/{username}")
     public Reviews getRestaurantById(@PathVariable Long restaurantId, @PathVariable String username){
-
+        if(username.equals("-")) return null;
         Long userId = userRepository.getIdByEmail(username);
         System.out.println("Should be getted review with restaurantId  " + restaurantId);
         return reviewsRepository.findReview(restaurantId,userId);

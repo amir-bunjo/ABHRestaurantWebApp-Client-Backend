@@ -2,10 +2,7 @@ package com.abhrestaurant.clientserver.controller;
 
 
 import com.abhrestaurant.clientserver.exception.ResourceNotFoundException;
-import com.abhrestaurant.clientserver.model.Reservation;
-import com.abhrestaurant.clientserver.model.Restaurant;
-import com.abhrestaurant.clientserver.model.Reviews;
-import com.abhrestaurant.clientserver.model.Table;
+import com.abhrestaurant.clientserver.model.*;
 import com.abhrestaurant.clientserver.repository.*;
 import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +44,9 @@ public class RestaurantController {
 
     @Autowired
     MealsController mealsController;
+
+    @Autowired
+    TableController tableController;
 
     @PersistenceContext
     private EntityManager em;
@@ -144,6 +144,14 @@ public class RestaurantController {
             Restaurant restaurantInDB = restaurantRepository.getOne(restaurant.getId());
             System.out.println("nije null");
 
+            List<Table> tablesDB = new ArrayList<Table>();
+
+            tablesDB = restaurantInDB.getTables();
+
+            for(Table table: restaurant.getTables()){
+                tablesDB.add(table);
+            }
+            tableController.saveListOfTables(tablesDB);
             System.out.println("restoran je" + restaurantInDB.getName());
             restaurant.setTables(restaurantInDB.getTables());
             System.out.println("Should be saved restaurant");

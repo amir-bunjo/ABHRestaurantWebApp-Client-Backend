@@ -7,6 +7,8 @@ DROP TABLE IF EXISTS reservation;
 DROP TABLE IF EXISTS tables;
 DROP TABLE IF EXISTS meals;
 
+DROP TABLE IF EXISTS category;
+
 
 
 
@@ -87,6 +89,16 @@ CREATE TABLE IF NOT EXISTS meals (
  price FLOAT,
  meal_type VARCHAR,
  meal_category VARCHAR
+
+);
+
+CREATE TABLE IF NOT EXISTS category (
+ id SERIAL PRIMARY KEY,
+ name VARCHAR
+
+
+
+
 
 );
 

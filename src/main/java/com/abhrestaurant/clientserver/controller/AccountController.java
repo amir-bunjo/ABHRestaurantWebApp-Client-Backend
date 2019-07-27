@@ -32,6 +32,13 @@ public class AccountController {
         return userRepository.findAll();
     }
 
+    @GetMapping("/allusers")
+    public List<User> getAllUsersDescending(){
+
+        System.out.println("Should be getted all users");
+        return userRepository.getAllUsers();
+    }
+
     @GetMapping("/user/{id}")
     public User getUserById(@RequestBody Long id){
 
@@ -71,7 +78,8 @@ public class AccountController {
 
     @GetMapping("/user/byemail/{username}")
     public Optional<User> getUserByUsername(@PathVariable String username) {
-        return userRepository.findUserByEmail("bunjo16@gmail.com");
+        System.out.println("Should be getted user: " + username);
+        return userRepository.findUserByEmail(username);
     }
 
     @GetMapping("/user_id/byemail/{username}")

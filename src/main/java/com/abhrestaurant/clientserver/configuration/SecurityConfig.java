@@ -46,6 +46,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/api/reservations/bydate/{dateString}/byguest/{guestNumber}/bytime/{timeString}/{restaurantId}");
         web.ignoring().antMatchers("/api/reservation/available/count/{restaurantId}/{dateString}");
         web.ignoring().antMatchers("/api//table/restaurant/seats/{restaurantId}/{seats}/{dateString}/{timeString}");
+        web.ignoring().antMatchers("/api/restaurant/avalable/{name}/{seats}/{dateString}/{timeString}");
+        web.ignoring().antMatchers("/api/restaurant/matchpatern/{patern}/{mark}/{price}/{page}");
+        web.ignoring().antMatchers("/api/restaurant/count/matchpatern/{patern}/{mark}/{price}/{page}");
+        web.ignoring().antMatchers("/api/reviews/{restaurantId}/{username}");
+
+
+
+
+
+
     }
 
     @Autowired
