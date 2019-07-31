@@ -6,8 +6,11 @@ DROP TABLE IF EXISTS restaurants CASCADE;
 DROP TABLE IF EXISTS reservation;
 DROP TABLE IF EXISTS tables;
 DROP TABLE IF EXISTS meals;
+DROP TABLE IF EXISTS users;
 
 DROP TABLE IF EXISTS category;
+DROP TABLE IF EXISTS locations;
+
 
 
 
@@ -97,7 +100,11 @@ CREATE TABLE IF NOT EXISTS category (
  name VARCHAR
 
 
+);
 
+CREATE TABLE IF NOT EXISTS locations (
+ id SERIAL PRIMARY KEY,
+ name VARCHAR
 
 
 );

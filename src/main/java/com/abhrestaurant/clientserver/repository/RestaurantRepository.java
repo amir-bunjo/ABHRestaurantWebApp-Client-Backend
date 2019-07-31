@@ -19,11 +19,11 @@ public interface RestaurantRepository extends JpaRepository<Restaurant,Long> {
     @Query(value= "SELECT count(*) FROM restaurants", nativeQuery = true)
     Long getTableLength();
 
-    @Query(value= " SELECT * FROM restaurants WHERE name ILIKE %?1% AND mark <= ?2 AND price_range <= ?3 ", nativeQuery = true)
-    List<Restaurant> getMatchedRestaurants(String matchpatern,Float mark,Float price);
+    @Query(value= " SELECT * FROM restaurants WHERE name ILIKE %?1% AND mark >= ?2 AND mark <= ?3 AND price_range <= ?4 ", nativeQuery = true)
+    List<Restaurant> getMatchedRestaurants(String matchpatern,Float lowMark,Float topMark, Float price);
 
-    @Query(value= " SELECT * FROM restaurants WHERE  mark <= ?1 AND price_range <= ?2  ", nativeQuery = true)
-    List<Restaurant> getMatchedRestaurantsByMarkAndPrice(Float mark,Float price);
+    @Query(value= " SELECT * FROM restaurants WHERE  mark >= ?1 AND mark <= ?2 AND price_range <= ?3  ", nativeQuery = true)
+    List<Restaurant> getMatchedRestaurantsByMarkAndPrice(Float lowMark, Float topMark, Float price);
 
     @Query(value= " SELECT * FROM restaurants WHERE name ILIKE %?1%  ", nativeQuery = true)
     List<Restaurant> getAllRestaurantsWithMatchedName(String matchpatern);

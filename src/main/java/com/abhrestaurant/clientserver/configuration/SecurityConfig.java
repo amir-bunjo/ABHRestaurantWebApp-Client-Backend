@@ -50,6 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/api/restaurant/matchpatern/{patern}/{mark}/{price}/{page}");
         web.ignoring().antMatchers("/api/restaurant/count/matchpatern/{patern}/{mark}/{price}/{page}");
         web.ignoring().antMatchers("/api/reviews/{restaurantId}/{username}");
+        web.ignoring().antMatchers("/api/get/allemails");
 
 
 

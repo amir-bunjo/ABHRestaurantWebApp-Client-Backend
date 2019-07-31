@@ -90,4 +90,18 @@ INSERT INTO category (name) VALUES ('French');
 INSERT INTO category (name) VALUES ('Spanish');
 
 
+INSERT INTO locations (name) VALUES ('Sarajevo');
+INSERT INTO locations (name) VALUES ('Zenica');
+INSERT INTO locations (name) VALUES ('Tuzla');
+INSERT INTO locations (name) VALUES ('Mostar');
+INSERT INTO locations (name) VALUES ('Kakanj');
+INSERT INTO locations (name) VALUES ('Visoko');
+INSERT INTO locations (name) VALUES ('Banja Luka');
+INSERT INTO locations (name) VALUES ('Kiseljak');
+
+
+
+
+
+
 

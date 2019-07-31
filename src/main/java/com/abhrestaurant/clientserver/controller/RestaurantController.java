@@ -67,10 +67,14 @@ public class RestaurantController {
         List<Restaurant> matchedRestaurants = null;
         List<Restaurant> found = new ArrayList<Restaurant>();
 
+        Float lowMark = mark - new Float(0.5);
+        Float topMark = mark + new Float(0.5);
+
+
         if (patern.equals("-"))
-            matchedRestaurants = restaurantRepository.getMatchedRestaurantsByMarkAndPrice(mark, price);
+            matchedRestaurants = restaurantRepository.getMatchedRestaurantsByMarkAndPrice(lowMark,topMark, price);
         else
-            matchedRestaurants = restaurantRepository.getMatchedRestaurants(patern, mark, price);
+            matchedRestaurants = restaurantRepository.getMatchedRestaurants(patern, lowMark,topMark, price);
 
         System.out.println("Should be getted all restaurant" + patern);
 
@@ -230,10 +234,15 @@ public class RestaurantController {
         List<Restaurant> matchedRestaurants = null;
         List<Restaurant> found = new ArrayList<Restaurant>();
 
+        Float lowMark = mark - new Float(0.5);
+        Float topMark = mark + new Float(0.5);
+
+
+
         if (patern.equals("-"))
-            matchedRestaurants = restaurantRepository.getMatchedRestaurantsByMarkAndPrice(mark, price);
+            matchedRestaurants = restaurantRepository.getMatchedRestaurantsByMarkAndPrice(lowMark,topMark, price);
         else
-            matchedRestaurants = restaurantRepository.getMatchedRestaurants(patern, mark, price);
+            matchedRestaurants = restaurantRepository.getMatchedRestaurants(patern, lowMark,topMark, price);
 
         System.out.println("Should be getted all restaurant" + patern);
 
